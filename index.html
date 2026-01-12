@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SHA Cafe</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;
+}
+
+body{
+    background:#f9f5f0;
+    color:#333;
+    line-height:1.6;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+    padding:0 20px;
+}
+
+header{
+    background:#4a2c2a;
+    
+    position:fixed;
+    width:100%;
+    top:0;
+    z-index:1000;
+    box-shadow:0 2px 10px rgba(0,0,0,0.1);
+}
+
+.header-content{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px 0;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color:#fff;
+}
+
+.logo i{
+    font-size:2rem;
+    color:#d4a762;
+}
+
+nav ul{
+    display:flex;
+    list-style:none;
+    gap:25px;
+}
+
+nav a{
+    color:#fff;
+    text-decoration:none;
+    font-weight:500;
+    transition:color 0.3s;
+}
+
+nav a:hover{
+    color:#d4a762;
+}
+
+.hero{
+    background:linear-gradient(rgba(74,44,42,.85),rgba(74,44,42,.9)),
+    url(cafee.jpg);
+    
+    background-size:cover;
+    background-position:center;
+    text-align:center;
+    color:#fff;
+    margin-top:70px;
+    padding:100px 20px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    min-height:60vh;
+}
+
+.hero-content{
+    max-width:800px;
+    width:100%;
+}
+
+.hero-content h1{
+    font-size:3.5rem;
+    margin-bottom:20px;
+    color:#fff;
+    text-shadow:2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.hero-content p{
+    font-size:1.3rem;
+    color:#f0f0f0;
+    line-height:1.8;
+    margin-bottom:30px;
+    max-width:600px;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.btn{
+    background:#d4a762;
+    color:#4a2c2a;
+    padding:12px 30px;
+    border:none;
+    border-radius:30px;
+    font-weight:600;
+    cursor:pointer;
+    text-decoration:none;
+    display:inline-block;
+    transition:all 0.3s ease;
+}
+
+.btn:hover{
+    background:#c8953a;
+    transform:translateY(-3px);
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+}
+
+section{
+    padding:80px 0;
+}
+
+.section-title{
+    text-align:center;
+    font-size:2.4rem;
+    color:#4a2c2a;
+    margin-bottom:40px;
+}
+
+.section-title::after{
+    content:'';
+    display:block;
+    width:90px;
+    height:4px;
+    background:#d4a762;
+    margin:10px auto;
+}
+
+.menu-category-title{
+    text-align:center;
+    color:#4a2c2a;
+    font-size:1.8rem;
+    margin:60px 0 30px;
+    padding-bottom:10px;
+    border-bottom:2px solid #d4a762;
+    display:inline-block;
+}
+
+.menu-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:30px;
+    margin-top:20px;
+}
+
+.menu-item{
+    background:#fff;
+    border-radius:10px;
+    box-shadow:0 5px 15px rgba(0,0,0,.1);
+    overflow:hidden;
+    transition:transform 0.3s;
+    height:100%;
+    display:flex;
+    flex-direction:column;
+}
+
+.menu-item:hover{
+    transform:translateY(-10px);
+    box-shadow:0 10px 20px rgba(0,0,0,.15);
+}
+
+.menu-item img{
+    width:100%;
+    height:300px;
+    object-fit:cover;
+    object-position:center;
+}
+
+.menu-content{
+    padding:20px;
+    flex-grow:1;
+    display:flex;
+    flex-direction:column;
+}
+.cold{
+    width:100%;
+    height:500px;
+    object-fit:cover;
+    object-position:center;
+}
+
+.menu-content h3{
+    color:#4a2c2a;
+    margin-bottom:8px;
+    font-size:1.4rem;
+}
+
+.menu-content p{
+    color:#666;
+    margin-bottom:15px;
+    font-size:0.95rem;
+    flex-grow:1;
+}
+
+.price{
+    color:#d4a762;
+    font-size:1.3rem;
+    font-weight:bold;
+    margin:15px 0;
+}
+
+.menu-btn{
+    width:100%;
+    padding:10px;
+    font-size:0.95rem;
+    margin-top:auto;
+}
+
+.about{
+    background:#4a2c2a;
+    color:#fff;
+}
+
+.about-content{
+    display:flex;
+    align-items:center;
+    gap:40px;
+    flex-wrap:wrap;
+}
+
+.about-text{
+    flex:1;
+    min-width:300px;
+}
+
+.about-text h2{
+    font-size:2.2rem;
+    margin-bottom:20px;
+    color:#d4a762;
+}
+
+.about-points{
+    margin:20px 0;
+}
+
+.about-points li{
+    margin-bottom:12px;
+    padding-left:25px;
+    position:relative;
+}
+
+.about-points li:before{
+    content:"✓";
+    color:#d4a762;
+    font-weight:bold;
+    position:absolute;
+    left:0;
+}
+
+.about-img{
+    flex:1;
+    min-width:300px;
+}
+
+.about-img img{
+    width:100%;
+    border-radius:10px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.3);
+}
+
+.contact-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:30px;
+}
+
+.contact-item{
+    text-align:center;
+    padding:20px;
+    background:#fff;
+    border-radius:10px;
+    box-shadow:0 5px 15px rgba(0,0,0,.1);
+}
+
+.contact-item h3{
+    color:#4a2c2a;
+    margin-bottom:15px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+}
+
+.contact-item i{
+    color:#d4a762;
+}
+
+.social-item{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:15px;
+}
+
+.social-link{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:50px;
+    height:50px;
+    background:#4a2c2a;
+    color:#fff;
+    border-radius:50%;
+    font-size:1.5rem;
+    transition:all 0.3s;
+    text-decoration:none;
+}
+
+.social-link:hover{
+    background:#d4a762;
+    transform:translateY(-5px);
+}
+
+footer{
+    background:#3a231f;
+    color:#ddd;
+    text-align:center;
+    padding:30px 0;
+}
+
+footer p{
+    margin:10px 0;
+}
+
+@media(max-width:992px){
+    .hero-content h1{
+        font-size:2.8rem;
+    }
+    
+    .hero-content p{
+        font-size:1.2rem;
+    }
+}
+
+@media(max-width:768px){
+    nav ul{
+        flex-direction:column;
+        position:absolute;
+        top:70px;
+        left:0;
+        width:100%;
+        background:#4a2c2a;
+        padding:20px;
+        text-align:center;
+        display:none;
+    }
+    
+    nav ul.active{
+        display:flex;
+    }
+    
+    .hero{
+        padding:80px 20px;
+        min-height:70vh;
+    }
+    
+    .hero-content h1{
+        font-size:2.2rem;
+    }
+    
+    .hero-content p{
+        font-size:1.1rem;
+    }
+    
+    .section-title{
+        font-size:2rem;
+    }
+    
+    .about-content{
+        flex-direction:column;
+    }
+    
+    .menu-item img{
+        height:180px;
+    }
+}
+
+@media(max-width:480px){
+    .menu-grid{
+        grid-template-columns:1fr;
+    }
+    
+    .hero{
+        padding:60px 20px;
+        min-height:60vh;
+    }
+    
+    .hero-content h1{
+        font-size:1.8rem;
+    }
+    
+    .hero-content p{
+        font-size:1rem;
+    }
+    
+    .section-title{
+        font-size:1.8rem;
+    }
+    
+    .menu-item img{
+        height:160px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="container header-content">
+<div class="logo">
+<i class="fas fa-coffee"></i>
+<h2>SHA Cafe</h2>
+</div>
+
+<nav>
+<ul id="navMenu">
+<li><a href="#home">Home</a></li>
+<li><a href="#menu-section">Menu</a></li>
+<li><a href="#about">About Us</a></li>
+<li><a href="#contact">Contact</a></li>
+</ul>
+</nav>
+</div>
+</header>
+
+<section id="home" class="hero">
+<div class="container hero-content">
+<h1>Welcome to SHA Cafe</h1>
+<p>Experience the finest coffee, delicious homemade pastries, and a warm, inviting atmosphere that feels just like home.</p>
+
+</div>
+</section>
+
+<section id="menu-section">
+<div class="container">
+<h2 class="section-title">Our Menu</h2>
+
+<div style="text-align:center;">
+<h3 class="menu-category-title">Hot Coffee</h3>
+</div>
+
+<div class="menu-grid">
+<div class="menu-item">
+<img src="espresso" alt="Espresso">
+<div class="menu-content">
+<h3>Espresso</h3>
+<p>Strong & rich coffee shot, perfect to kickstart your day</p>
+<div class="price">₹120</div>
+<button class="btn menu-btn">Order Now</button>
+</div>
+</div>
+
+<div class="menu-item">
+<img src="cappuccino" alt="Cappuccino">
+<div class="menu-content">
+<h3>Cappuccino</h3>
+<p>Perfectly balanced espresso with steamed milk and thick foam</p>
+<div class="price">₹180</div>
+<button class="btn menu-btn">Order Now</button>
+</div>
+</div>
+
+<div class="menu-item">
+<img src="caramel-latte.jpg" alt="Latte">
+<div class="menu-content">
+<h3>Caramel Latte</h3>
+<p>Smooth espresso with steamed milk and caramel syrup</p>
+<div class="price">₹200</div>
+<button class="btn menu-btn">Order Now</button>
+</div>
+</div>
+</div>
+
+<div style="text-align:center;">
+<h3 class="menu-category-title">Cold Coffee</h3>
+</div>
+
+<div class="menu-grid">
+<div class="menu-item">
+<img src="Iced Americano.jpg"alt="Iced Coffee"class="cold">
+<div class="menu-content">
+<h3>Iced Americano</h3>
+<p>Chilled espresso shots with cold water over ice</p>
+<div class="price">₹160</div>
+<button class="btn menu-btn">Order Now</button>
+</div>
+</div>
+
+<div class="menu-item">
+<img src="Cold Brew.jpg" alt="Cold Brew" height="1200px" class="cold">
+<div class="menu-content">
+<h3>Cold Brew</h3>
+<p>Slow-steeped coffee for 18 hours, smooth and less acidic</p>
+<div class="price">₹190</div>
+<button class="btn menu-btn">Order Now</button>
+</div>
+</div>
+
+<div class="menu-item">
+<img src="Mocha Frappuccino.png" alt="Frappuccino"class="cold">
+<div class="menu-content">
+<h3>Mocha Frappuccino</h3>
+<p>Blended coffee with chocolate and topped with whipped cream</p>
+<div class="price">₹220</div>
+<button class="btn menu-btn">Order Now</button>
+</div>
+</div>
+</div>
+
+<div style="text-align:center;">
+<h3 class="menu-category-title">Snacks</h3>
+</div>
+
+<div class="menu-grid">
+<div class="menu-item">
+<img src="Club Sandwich" alt="Sandwich">
+<div class="menu-content">
+<h3>Club Sandwich</h3>
+<p>Triple-decker sandwich with chicken, veggies, and signature sauce</p>
+<div class="price">₹250</div>
+<button class="btn menu-btn">Order Now</button>
+</div>
+</div>
+
+<div class="menu-item">
+<img src="Margherita Pizza.png" alt="Pizza">
+<div class="menu-content">
+<h3>Margherita Pizza</h3>
+<p>Classic pizza with fresh mozzarella, tomatoes, and basil</p>
+<div class="price">₹280</div>
+<button class="btn menu-btn">Order Now</button>
+</div>
+</div>
+
+<div class="menu-item">
+<img src="Mango Muffins with Maple Walnut Streusel.jpg" alt="Croissant">
+<div class="menu-content">
+<h3>Mango Muffins with Maple Walnut Streusel</h3>
+<p>Flaky, buttery French croissant, perfect with coffee</p>
+<div class="price">₹120</div>
+<button class="btn menu-btn">Order Now</button>
+</div>
+</div>
+</div>
+
+<div style="text-align:center;">
+<h3 class="menu-category-title">Desserts</h3>
+</div>
+
+<div class="menu-grid">
+<div class="menu-item">
+<img src="Chocolate Lava Cake" alt="Chocolate Cake">
+<div class="menu-content">
+<h3>Chocolate Lava Cake</h3>
+<p>Warm chocolate cake with a molten center, served with vanilla ice cream</p>
+<div class="price">₹220</div>
+<button class="btn menu-btn">Order Now</button>
+</div>
+</div>
+
+<div class="menu-item">
+<img src="New York Cheesecake" alt="Cheesecake">
+<div class="menu-content">
+<h3>New York Cheesecake</h3>
+<p>Creamy cheesecake with a graham cracker crust and berry compote</p>
+<div class="price">₹240</div>
+<button class="btn menu-btn">Order Now</button>
+</div>
+</div>
+
+<div class="menu-item">
+<img src="Walnut Brownie" alt="Brownie">
+<div class="menu-content">
+<h3>Walnut Brownie</h3>
+<p>Rich chocolate brownie with crunchy walnuts, served warm</p>
+<div class="price">₹150</div>
+<button class="btn menu-btn">Order Now</button>
+</div>
+</div>
+</div>
+
+</div>
+</section>
+
+<section id="about" class="about">
+<div class="container about-content">
+<div class="about-text">
+<h2>About SHA Cafe</h2>
+<p>Founded with a deep love for coffee and community, SHA Cafe brings premium coffee taste with the comfort of home. Our mission is to create a space where people can connect, relax, and enjoy high-quality beverages and food.</p>
+<ul class="about-points">
+<li>Serving premium Arabica and Robusta coffee beans sourced from sustainable farms</li>
+<li>Fresh, locally sourced ingredients for all our food items</li>
+<li>Cozy, thoughtfully designed space perfect for work or relaxation</li>
+<li>Expert baristas trained in specialty coffee preparation</li>
+<li>Community-focused events like open mic nights and book clubs</li>
+<li>Eco-friendly practices including compostable packaging</li>
+</ul>
+</div>
+<div class="about-img">
+<img src="cafe abt" alt="SHA Cafe Interior">
+</div>
+</div>
+</section>
+
+<section id="contact">
+<div class="container">
+<h2 class="section-title">Contact Us</h2>
+
+<div class="contact-grid">
+<div class="contact-item">
+<h3><i class="fas fa-map-marker-alt"></i> Location</h3>
+<p>123 Coffee Street, Tuty</p>
+</div>
+<div class="contact-item">
+<h3><i class="fas fa-phone"></i> Phone</h3>
+<p>+91 9876543210</p>
+</div>
+<div class="contact-item">
+<h3><i class="fas fa-envelope"></i> Email</h3>
+<p>shacafe@gmail.com</p>
+</div>
+<div class="contact-item social-item">
+<h3>Follow us for more offers and details!</h3>
+<p>Stay updated with our latest menu items and special offers</p>
+<a href="https://www.instagram.com/sha_cafe_/" target="_blank" class="social-link">
+<i class="fab fa-instagram"></i>
+</a>
+</div>
+</div>
+</div>
+</section>
+
+<footer>
+<p>© 2026 SHA Cafe. All Rights Reserved.</p>
+<p>Made with <i class="fas fa-heart" style="color:#d4a762;"></i> for coffee lovers</p>
+</footer>
+
+</body>
+</html>
